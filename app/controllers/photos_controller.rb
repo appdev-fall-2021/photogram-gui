@@ -11,18 +11,27 @@ class PhotosController < ApplicationController
   def show
 
     #Parameters: {"path_photo"=>"777"}
-
-
     url_photo = params.fetch("path_photo")
-
     matching_photos = Photo.where({ :id => url_photo})
-
     @the_photo = matching_photos.at(0)
 
 
     render({ :template => "photo_templates/show.html.erb"})
   end
 
+  def delete
 
+    #Parameters: {"path_photo"=>"916"}
+    the_id = params.fetch("path_photo")
+    matching_photos = Photo.where({ :id => the_id})
+    @the_photo = matching_photos.at(0)
+
+    @the_photo.destroy
+
+    #render({ :template => "photo_templates/delete.html.erb"})
+    redirect_to("/photos")
+
+  end
+  
 
 end
