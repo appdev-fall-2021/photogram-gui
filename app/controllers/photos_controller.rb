@@ -34,4 +34,23 @@ class PhotosController < ApplicationController
   end
   
 
+  def create
+
+    #Parameters: {"query_image"=>"https://www.chicagobooth.edu/-/media/project/chicago-booth/phd/chicago-booth-phd-students.jpg?cx=0.67&cy=0.36&cw=940&ch=749&hash=30D2BAB79B1274B6D4D96A4F00C2A7BF", "query_caption"=>"Chicago Booth Faculty", "query_owner_id"=>"117"}
+  input_image = params.fetch("query_image")
+  input_caption = params.fetch("query_caption")
+  input_owner_id = params.fetch("query_owner_id")
+
+  a_new_photo = Photo.new
+
+  a_new_photo.image = input_image
+  a_new_photo.caption =input_caption
+  a_new_photo.owner_id =input_owner_id
+
+  a_new_photo.save
+
+    #render({ :template => "photo_templates/create.html.erb"})
+    redirect_to("/photos/" + a_new_photo.id.to_s)
+  end
+
 end
